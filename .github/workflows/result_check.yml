@@ -21,7 +21,7 @@ jobs:
         name: acquiring your results
         id: your_results
         with:
-         file_path: "result.json"       
+         file_path: "lab_3/result.json"       
       - name: displaying your results
         run: |
           echo "your variant: ${{steps.your_results.outputs.variant}}"
