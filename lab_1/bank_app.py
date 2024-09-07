@@ -5,19 +5,17 @@ from tkinter import *
 from tkinter import messagebox
 
 
-
 class Bank:
     """
     A class that represents a simple banking application GUI using Tkinter. 
     """
-
+    
     def __init__(self,master: tk.Tk) -> None:
         """
         this method initializes the main application window and sets up initial attributes.
         args: self, master (tk.Tk).
         return:
         """
-
         self.master = master()
         self.master.title("BANK Application")
         self.ws=self.master.winfo_screenwidth()
@@ -58,10 +56,9 @@ class Bank:
         self.m_b3 = tk.Button(self.menu,text="Profile",bd=0,bg="#777777",font=("Times","20","bold"),command=self.show_profile,fg="#aadcba")
         self.m_b3.grid(row=0,column=1,padx=76,pady=25)
 
-
         self.m_b4 = tk.Button(self.menu,text="LOGOUT",width=10,bg="#777777",font=("Times","18","bold"),command=self.show_f,fg="#ff0000")
-
         self.m_b4.grid(row=3,column=1,padx=76,pady=15)
+        
         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
 
     def credit_Balance(self) -> None:
@@ -70,7 +67,6 @@ class Bank:
         args: self
         return: None
         """
-
         self.menu.grid_forget()
 
         self.credframe = tk.Frame(self.master,bg="#777777")
@@ -133,7 +129,6 @@ class Bank:
         self.credframe.grid_forget()
         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
 
-
     def debframe(self) -> None:
         """
         this method displays the debit balance screen where users can enter the amount to be debited.
@@ -152,7 +147,6 @@ class Bank:
         
         self.up_amnt_lbl2 = Label(self.debit_Balance,text="Amount",font=("Times","20","bold"),fg="#ffffff",bg="#777777")
         self.up_amnt_lbl2.grid(row=2,column=0,pady=10,padx=30)
-        
 
         self.up_amnt = Entry(self.debit_Balance,bg="#123456",width=20,font=("Times","20","bold"),fg="#FFFFFF")
         self.up_amnt.grid(row=2,column=1,pady=12,padx=55)
@@ -162,7 +156,6 @@ class Bank:
         
         self.up_amnt_btn1 = tk.Button(self.debit_Balance,text="<<Back",bg="#777777",font=("Times","18","bold"),command=self.show_m4,fg="#000000",width=10)
         self.up_amnt_btn1.grid(row=4,column=0,pady=17,padx=40)
-
 
         self.debit_Balance.grid(padx=self.ws*.3,pady=self.hs*.2)
     
@@ -174,8 +167,6 @@ class Bank:
         """
         self.debit_Balance.grid_forget()
         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
-
-
 
     def update_balance(self) -> None:
         """
@@ -202,16 +193,15 @@ class Bank:
                         messagebox.showinfo("!!Sucess!!",s)
                         self.debit_Balance.grid_forget()
                         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
-
                     
                     else:
                         
                         s = "\nInsufficient account balance\nyou only have {}rs in your account".format(bal)
                         messagebox.showinfo("!!DEBIT ERROR!!",s)
-
                     
                 else :
                     messagebox.showerror("!!UNKOWN ERROR!!","DATABASE LOOKUP Error \nSomething WEnt Wrong")
+            
             except ValueError as e :
                 messagebox.showerror("!!Value Error!!","!!ERROR!!Enter Vaid Amount to Debit\n")
 
@@ -220,7 +210,6 @@ class Bank:
 
         else :
             messagebox.showerror("!!Input Error!!","Please Enter Amount to Debit")
-
 
     def show_f(self) -> None:
         """
@@ -241,14 +230,12 @@ class Bank:
         self.profframe.grid_forget()
         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
 
-
     def show_profile(self) -> None:
         """
         this method displays the user's profile information including name, account number, and balance.
         args: self
         return: None
         """
-
         self.menu.grid_forget()
         self.profframe = tk.Frame(self.master,bg="gray")
         try :
@@ -261,8 +248,6 @@ class Bank:
             self.udpass.set(data[2])
             self.udacc.set(data[0])
             self.udbal.set(data[3])
-
-
             
         except Exception as e :
             messagebox.showerror("DataBASE Connectivity","!!Error!!Database Connection!!{}".format(e))
@@ -277,7 +262,6 @@ class Bank:
         self.p_l3 = Label(self.profframe,text="Balance:{}".format(self.udbal.get()),bg="gray",font=("Times","18","bold"),fg="#ffffff")
         self.p_l3.grid(row=2,column=0,columnspan=2,padx=64)
 
-
         self.p_b1 = tk.Button(self.profframe,text="Change Name",bg="#777777",font=("Times","20","bold"),width=13,command=self.updatename,fg="#003b8b")
         self.p_b1.grid(row=3,column=0,padx=64,pady=19)
 
@@ -288,7 +272,6 @@ class Bank:
         self.p_b3.grid(row=5,column=1,padx=64,pady=18)
 
         self.profframe.grid(padx=self.ws*.3,pady=self.hs*.2)
-
 
     def update_password(self) -> None:
         """
@@ -320,16 +303,12 @@ class Bank:
                     
                 else :
                     messagebox.showerror("!!Invalid Error!!","!!Error!!\nSomething Went Wrong\nTry Again")
-
-
                     
             except Exception as e :
                 messagebox.showerror("!!DataBase Error!!","Error!!{}".format(e))
                 
         else :
             messagebox.showerror("Input Error","Error!!Please Fill Passwords Properly")
-
-
 
     def change_password(self) -> None:
         """
@@ -370,10 +349,8 @@ class Bank:
         args: self
         return: None
         """
-
         self.passupdate.grid_forget()
         self.profframe.grid(padx=self.ws*.3,pady=self.hs*.2)
-
 
     def change_name(self) -> None:
         """
@@ -391,8 +368,8 @@ class Bank:
                     users = [ user[0] for user in c.fetchall() ]
                     if name in users :
                         messagebox.showinfo("!!USER Exists!!","This name is already taken by another user so please choose a unique one")
-                    else :                        
-                        
+                    else :
+                                                
                         c.execute("update user set name='{}' where name='{}'".format(name,self.user))
                         db.commit()
                         c.close()
@@ -407,6 +384,7 @@ class Bank:
                 
             else :
                 messagebox.showerror("NameError","Error!!Please Enter new username")
+        
         except Exception as e :
             messagebox.showerror("Error!!",e)
 
@@ -416,7 +394,6 @@ class Bank:
         args: self
         return: None
         """
-
         self.profframe.grid_forget()
 
         self.nameupdate = tk.Frame(self.master,bg="gray")
@@ -448,8 +425,6 @@ class Bank:
         """
         self.nameupdate.grid_forget()
         self.profframe.grid(padx=self.ws*.3,pady=self.hs*.2)
-    
-
 
     def main_frame(self) -> None:
         """
@@ -457,7 +432,6 @@ class Bank:
         args: self
         return: None
         """
-
         self.f = Frame(self.master,bg="#777777")
         Bank.username = StringVar()
         Bank.password = StringVar()
@@ -473,8 +447,6 @@ class Bank:
 
         self.l2 = Label(self.f,text="Password : ",bg="#777777",font=("Times","30","bold"),fg="#123456")
         self.l2.grid(row=2,column=0)
-
-
 
         self.e2 = Entry(self.f,textvariable=Bank.password,show="*",bg="#123456",width=20,font=("Times","20","bold"),fg="#FFFFFF")
         self.e2.grid(row=2,column=1,padx=20)
@@ -507,16 +479,12 @@ class Bank:
         self.menu_forget = True
         self.f.grid(padx=self.ws*.3,pady=self.hs*.2)
 
-
-
-
     def signup(self) -> None:
         """
         this method displays Displays a sign-up form user interface and hides the previous interface.
         args: self
         return: None
         """
-
         self.bal = StringVar()
         self.uname = StringVar()
         self.creds = StringVar()
@@ -542,7 +510,6 @@ class Bank:
         self.se3 = Entry(self.sp,textvariable=self.bal,bg="#123456",width=20,font=("Times","20","bold"),fg="#FFFFFF")
         self.se3.grid(row=2,column=1)
 
-
         self.sb2 = Button(self.sp,bg="#777777",text="SIGNUP",font=("Times","20","bold"),command=self.mksignup,fg="#123456")
         self.sb2.grid(row=3,column=1,columnspan=4)
 
@@ -556,7 +523,6 @@ class Bank:
         args: self
         return: None
         """
-
         uname = self.uname.get().lower().strip()
         password  = self.creds.get()
         balance = self.bal.get()
@@ -578,9 +544,9 @@ class Bank:
                     messagebox.showinfo("Account Created","Congratulations!! Your Account is Successfully Created\nPlease LOGIN to Enjoy your services")
                     self.sp.grid_forget()
                 self.f.grid(padx=self.ws*.3,pady=self.hs*.2)
-            except ValueError as e : 
-                messagebox.showerror("ERROR","Please Enter a Valid Amount to Deposit Initial")
                 
+            except ValueError as e : 
+                messagebox.showerror("ERROR","Please Enter a Valid Amount to Deposit Initial")    
 
             except Exception as e :
                 messagebox.showerror("ERROR","SOMETHING WENT WRONG\nError!!{}".format(e))
@@ -594,11 +560,8 @@ class Bank:
         args:self, event (None).
         return: None
         """
-
         UserName = self.e1.get().lower().strip()
         Password = self.e2.get()
-
-
         try :
 
             db = sql.connect("localhost","bank","bank","bank")
@@ -631,9 +594,6 @@ class Bank:
         except Exception as e :
 
             messagebox.showerror("Error","!!Check Data BAse Connectivity {}".format(e))
-
-
-
 
 root = Bank(Tk)
 root.run()
