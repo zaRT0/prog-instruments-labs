@@ -5,9 +5,10 @@ from tkinter import *
 from tkinter import messagebox
 
 
+
 class Bank:
 
-    def __init__(self,master):
+    def __init__(self,master: tk.Tk) -> None:
 
         self.master = master()
         self.master.title("BANK Application")
@@ -21,10 +22,10 @@ class Bank:
         self.udbal = StringVar()
         self.menu_forget = False
 
-    def run(self):
+    def run(self) -> None:
         self.main_frame()
 
-    def menu(self):
+    def menu(self) -> None:
 
         self.menu = tk.Frame(self.master,bg="#777777")
 
@@ -46,7 +47,7 @@ class Bank:
         self.m_b4.grid(row=3,column=1,padx=76,pady=15)
         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
 
-    def credit_Balance(self):
+    def credit_Balance(self) -> None:
 
         self.menu.grid_forget()
 
@@ -72,7 +73,7 @@ class Bank:
 
         self.credframe.grid(padx=self.ws*.3,pady=self.hs*.2)
     
-    def credit(self):
+    def credit(self) -> None:
         if self.up_amnt.get():
             try :
                 amount = float(self.up_amnt.get())
@@ -96,12 +97,12 @@ class Bank:
         else :
             messagebox.showerror("!!Input Error!!","Please Enter Some Amount to Credit")
     
-    def show_m5(self):
+    def show_m5(self) -> None:
         self.credframe.grid_forget()
         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
 
 
-    def debframe(self):
+    def debframe(self) -> None:
     
         self.menu.grid_forget()
         self.debit_Balance = tk.Frame(self.master,bg="#777777")
@@ -128,13 +129,13 @@ class Bank:
 
         self.debit_Balance.grid(padx=self.ws*.3,pady=self.hs*.2)
     
-    def show_m4(self):
+    def show_m4(self) -> None:
         self.debit_Balance.grid_forget()
         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
 
 
 
-    def update_balance(self):
+    def update_balance(self) -> None:
         if self.up_amnt.get() :
             try :
                 amnt=float(self.up_amnt.get())
@@ -174,17 +175,17 @@ class Bank:
             messagebox.showerror("!!Input Error!!","Please Enter Amount to Debit")
 
 
-    def show_f(self):
+    def show_f(self) -> None:
         self.menu.grid_forget()
         self.menu_forget = True
         self.f.grid(padx=self.ws*.3,pady=self.hs*.2)
 
-    def show_m(self):
+    def show_m(self) -> None:
         self.profframe.grid_forget()
         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
 
 
-    def show_profile(self):
+    def show_profile(self) -> None:
 
         self.menu.grid_forget()
         self.profframe = tk.Frame(self.master,bg="gray")
@@ -227,7 +228,7 @@ class Bank:
         self.profframe.grid(padx=self.ws*.3,pady=self.hs*.2)
 
 
-    def update_password(self):
+    def update_password(self) -> None:
         old = self.Old_Password.get()
         new = self.New_Password.get()
         self.Old_Password.set("")
@@ -263,7 +264,7 @@ class Bank:
 
 
 
-    def change_password(self):
+    def change_password(self) -> None:
         self.profframe.grid_forget()
         self.passupdate = tk.Frame(self.master,bg="gray")
         self.up_opass_lbl1 = Label(self.passupdate,text="Welcome to Password Update Service",bg="gray",font=("Times","20","bold"),fg="#abcdef")
@@ -291,13 +292,13 @@ class Bank:
 
         self.passupdate.grid(padx=self.ws*.3,pady=self.hs*.2)
 
-    def show_m3(self):
+    def show_m3(self) -> None:
 
         self.passupdate.grid_forget()
         self.profframe.grid(padx=self.ws*.3,pady=self.hs*.2)
 
 
-    def change_name(self):
+    def change_name(self) -> None:
         try :
             if self.up_name.get() :
                 name = self.up_name.get().lower().strip()
@@ -327,7 +328,7 @@ class Bank:
         except Exception as e :
             messagebox.showerror("Error!!",e)
 
-    def updatename(self):
+    def updatename(self) -> None:
 
         self.profframe.grid_forget()
 
@@ -352,13 +353,13 @@ class Bank:
 
         self.nameupdate.grid(padx=self.ws*.3,pady=self.hs*.2)
 
-    def show_m1(self):
+    def show_m1(self) -> None:
         self.nameupdate.grid_forget()
         self.profframe.grid(padx=self.ws*.3,pady=self.hs*.2)
     
 
 
-    def main_frame(self):
+    def main_frame(self) -> None:
 
         self.f = Frame(self.master,bg="#777777")
         Bank.username = StringVar()
@@ -391,7 +392,7 @@ class Bank:
         self.b2.grid(row=4,column=1,columnspan=4)
         self.f.grid(padx=self.ws*.3,pady=self.hs*.2)
 
-    def fpass(self):
+    def fpass(self) -> None:
         messagebox.showinfo("PRIVACY","Due to your privacy reason you have to meet in person to nearest branch with all documents to update your password.")
 
     def show_sf(self):
@@ -402,7 +403,7 @@ class Bank:
 
 
 
-    def signup(self):
+    def signup(self) -> None:
 
             self.bal = StringVar()
             self.uname = StringVar()
@@ -437,7 +438,7 @@ class Bank:
             self.sb3.grid(row=3,column=0,padx=66,pady=17)
             self.sp.grid(padx=self.ws*.3,pady=self.hs*.2)
 
-    def mksignup(self):
+    def mksignup(self) -> None:
 
         uname = self.uname.get().lower().strip()
         password  = self.creds.get()
@@ -470,7 +471,7 @@ class Bank:
         else :
             messagebox.showerror("INPUT","Please fill-in all the Details")
 
-    def login(self,event=None):
+    def login(self,event=None) -> None:
 
         UserName = self.e1.get().lower().strip()
         Password = self.e2.get()
