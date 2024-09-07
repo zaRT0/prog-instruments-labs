@@ -7,8 +7,16 @@ from tkinter import messagebox
 
 
 class Bank:
+    """
+    A class that represents a simple banking application GUI using Tkinter. 
+    """
 
     def __init__(self,master: tk.Tk) -> None:
+        """
+        this method initializes the main application window and sets up initial attributes.
+        args: self, master (tk.Tk).
+        return:
+        """
 
         self.master = master()
         self.master.title("BANK Application")
@@ -23,10 +31,19 @@ class Bank:
         self.menu_forget = False
 
     def run(self) -> None:
+        """
+        this method start the application by showing the main frame.
+        args: self
+        return: None
+        """
         self.main_frame()
 
     def menu(self) -> None:
-
+        """
+        this method displays the menu options (Debit, Credit, Profile, Logout).
+        args: self
+        return: None
+        """
         self.menu = tk.Frame(self.master,bg="#777777")
 
         self.m_l1 = Label(self.menu,text="Welcome {}".format(self.user),bg="#777777",font=("Times","20","bold"),fg="#ffffff")
@@ -48,6 +65,11 @@ class Bank:
         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
 
     def credit_Balance(self) -> None:
+        """
+        this method displays the credit balance screen where users can enter the amount to be credited.
+        args: self
+        return: None
+        """
 
         self.menu.grid_forget()
 
@@ -74,6 +96,11 @@ class Bank:
         self.credframe.grid(padx=self.ws*.3,pady=self.hs*.2)
     
     def credit(self) -> None:
+        """
+        this method perfors the credit operation and update the user's balance in the database.
+        args: self
+        return: None
+        """
         if self.up_amnt.get():
             try :
                 amount = float(self.up_amnt.get())
@@ -98,11 +125,21 @@ class Bank:
             messagebox.showerror("!!Input Error!!","Please Enter Some Amount to Credit")
     
     def show_m5(self) -> None:
+        """
+        this method returns to the menu from the credit balance frame.
+        args: self
+        return: None
+        """
         self.credframe.grid_forget()
         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
 
 
     def debframe(self) -> None:
+        """
+        this method displays the debit balance screen where users can enter the amount to be debited.
+        args: self
+        return: None
+        """
     
         self.menu.grid_forget()
         self.debit_Balance = tk.Frame(self.master,bg="#777777")
@@ -130,12 +167,22 @@ class Bank:
         self.debit_Balance.grid(padx=self.ws*.3,pady=self.hs*.2)
     
     def show_m4(self) -> None:
+        """
+        this method returns to the menu from the debit balance frame.
+        args: self
+        return: None
+        """
         self.debit_Balance.grid_forget()
         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
 
 
 
     def update_balance(self) -> None:
+        """
+        this method performs the debit operation and update the user's balance in the database.
+        args: self
+        return: None
+        """
         if self.up_amnt.get() :
             try :
                 amnt = float(self.up_amnt.get())
@@ -176,16 +223,31 @@ class Bank:
 
 
     def show_f(self) -> None:
+        """
+        this method displays the login frame and hide the menu.
+        args: self
+        return: None
+        """
         self.menu.grid_forget()
         self.menu_forget = True
         self.f.grid(padx=self.ws*.3,pady=self.hs*.2)
 
     def show_m(self) -> None:
+        """
+        this method returns to the menu from the profile screen.
+        args: self
+        return: None
+        """
         self.profframe.grid_forget()
         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
 
 
     def show_profile(self) -> None:
+        """
+        this method displays the user's profile information including name, account number, and balance.
+        args: self
+        return: None
+        """
 
         self.menu.grid_forget()
         self.profframe = tk.Frame(self.master,bg="gray")
@@ -229,6 +291,11 @@ class Bank:
 
 
     def update_password(self) -> None:
+        """
+        this method updates password in database
+        args: self
+        return: None
+        """
         old = self.Old_Password.get()
         new = self.New_Password.get()
         self.Old_Password.set("")
@@ -265,6 +332,11 @@ class Bank:
 
 
     def change_password(self) -> None:
+        """
+        this method changes password in database
+        args: self
+        return: None
+        """
         self.profframe.grid_forget()
         self.passupdate = tk.Frame(self.master,bg="gray")
         self.up_opass_lbl1 = Label(self.passupdate,text="Welcome to Password Update Service",bg="gray",font=("Times","20","bold"),fg="#abcdef")
@@ -293,12 +365,22 @@ class Bank:
         self.passupdate.grid(padx=self.ws*.3,pady=self.hs*.2)
 
     def show_m3(self) -> None:
+        """
+        this method displays the profile update frame and hides the password update frame.
+        args: self
+        return: None
+        """
 
         self.passupdate.grid_forget()
         self.profframe.grid(padx=self.ws*.3,pady=self.hs*.2)
 
 
     def change_name(self) -> None:
+        """
+        this method changes the user's name in the database if it is valid and unique.
+        args: self
+        return: None
+        """
         try :
             if self.up_name.get() :
                 name = self.up_name.get().lower().strip()
@@ -329,6 +411,11 @@ class Bank:
             messagebox.showerror("Error!!",e)
 
     def updatename(self) -> None:
+        """
+        this method initializes and displays the name update frame for the user to update their username.
+        args: self
+        return: None
+        """
 
         self.profframe.grid_forget()
 
@@ -354,12 +441,22 @@ class Bank:
         self.nameupdate.grid(padx=self.ws*.3,pady=self.hs*.2)
 
     def show_m1(self) -> None:
+        """
+        this method displays the profile update frame and hides the name update frame.
+        args: self
+        return: None
+        """
         self.nameupdate.grid_forget()
         self.profframe.grid(padx=self.ws*.3,pady=self.hs*.2)
     
 
 
     def main_frame(self) -> None:
+        """
+        this method displays the main login frame where users enter credentials.
+        args: self
+        return: None
+        """
 
         self.f = Frame(self.master,bg="#777777")
         Bank.username = StringVar()
@@ -393,52 +490,72 @@ class Bank:
         self.f.grid(padx=self.ws*.3,pady=self.hs*.2)
 
     def fpass(self) -> None:
+        """
+        this method displays an informational message box to inform the user .
+        args: self
+        return: None
+        """
         messagebox.showinfo("PRIVACY","Due to your privacy reason you have to meet in person to nearest branch with all documents to update your password.")
 
     def show_sf(self):
-            self.sp.grid_forget()
-            self.menu_forget = True
-            self.f.grid(padx=self.ws*.3,pady=self.hs*.2)
+        """
+        this method displays a specific user interface element and hides another
+        args: self
+        return: None
+        """
+        self.sp.grid_forget()
+        self.menu_forget = True
+        self.f.grid(padx=self.ws*.3,pady=self.hs*.2)
 
 
 
 
     def signup(self) -> None:
+        """
+        this method displays Displays a sign-up form user interface and hides the previous interface.
+        args: self
+        return: None
+        """
 
-            self.bal = StringVar()
-            self.uname = StringVar()
-            self.creds = StringVar()
+        self.bal = StringVar()
+        self.uname = StringVar()
+        self.creds = StringVar()
 
-            self.f.grid_forget()
-            self.sp = Frame(self.master,bg="#777777")
+        self.f.grid_forget()
+        self.sp = Frame(self.master,bg="#777777")
 
-            self.sl1 = Label(self.sp,text="UserName : ",bg="#777777",font=("Times","30","bold"),fg="#123456")
-            self.sl1.grid(row=0,column=0,ipadx=40,pady=28)
+        self.sl1 = Label(self.sp,text="UserName : ",bg="#777777",font=("Times","30","bold"),fg="#123456")
+        self.sl1.grid(row=0,column=0,ipadx=40,pady=28)
 
-            self.se1 = Entry(self.sp,textvariable=self.uname,bg="#123456",width=20,font=("Times","20","bold"),fg="#FFFFFF")
-            self.se1.grid(row=0,column=1)
+        self.se1 = Entry(self.sp,textvariable=self.uname,bg="#123456",width=20,font=("Times","20","bold"),fg="#FFFFFF")
+        self.se1.grid(row=0,column=1)
 
-            self.sl2 = Label(self.sp,text="Password : ",bg="#777777",font=("Times","30","bold"),fg="#123456")
-            self.sl2.grid(row=1,column=0)
+        self.sl2 = Label(self.sp,text="Password : ",bg="#777777",font=("Times","30","bold"),fg="#123456")
+        self.sl2.grid(row=1,column=0)
 
-            self.se2 = Entry(self.sp,textvariable=self.creds,show="*",bg="#123456",width=20,font=("Times","20","bold"),fg="#FFFFFF")
-            self.se2.grid(row=1,column=1,padx=20)
+        self.se2 = Entry(self.sp,textvariable=self.creds,show="*",bg="#123456",width=20,font=("Times","20","bold"),fg="#FFFFFF")
+        self.se2.grid(row=1,column=1,padx=20)
 
-            self.sl3 = Label(self.sp,text="Balance : ",bg="#777777",font=("Times","30","bold"),fg="#123456")
-            self.sl3.grid(row=2,column=0,ipadx=42,pady=27)
+        self.sl3 = Label(self.sp,text="Balance : ",bg="#777777",font=("Times","30","bold"),fg="#123456")
+        self.sl3.grid(row=2,column=0,ipadx=42,pady=27)
 
-            self.se3 = Entry(self.sp,textvariable=self.bal,bg="#123456",width=20,font=("Times","20","bold"),fg="#FFFFFF")
-            self.se3.grid(row=2,column=1)
+        self.se3 = Entry(self.sp,textvariable=self.bal,bg="#123456",width=20,font=("Times","20","bold"),fg="#FFFFFF")
+        self.se3.grid(row=2,column=1)
 
 
-            self.sb2 = Button(self.sp,bg="#777777",text="SIGNUP",font=("Times","20","bold"),command=self.mksignup,fg="#123456")
-            self.sb2.grid(row=3,column=1,columnspan=4)
+        self.sb2 = Button(self.sp,bg="#777777",text="SIGNUP",font=("Times","20","bold"),command=self.mksignup,fg="#123456")
+        self.sb2.grid(row=3,column=1,columnspan=4)
 
-            self.sb3 = tk.Button(self.sp,text="<<Back",width=10,bg="#777777",font=("Times","18","bold"),command=self.show_sf,fg="#000000")
-            self.sb3.grid(row=3,column=0,padx=66,pady=17)
-            self.sp.grid(padx=self.ws*.3,pady=self.hs*.2)
+        self.sb3 = tk.Button(self.sp,text="<<Back",width=10,bg="#777777",font=("Times","18","bold"),command=self.show_sf,fg="#000000")
+        self.sb3.grid(row=3,column=0,padx=66,pady=17)
+        self.sp.grid(padx=self.ws*.3,pady=self.hs*.2)
 
     def mksignup(self) -> None:
+        """
+        this method handles the sign-up process by collecting user input and interacting with the database.
+        args: self
+        return: None
+        """
 
         uname = self.uname.get().lower().strip()
         password  = self.creds.get()
@@ -472,6 +589,11 @@ class Bank:
             messagebox.showerror("INPUT","Please fill-in all the Details")
 
     def login(self,event=None) -> None:
+        """
+        this method handles the login process by validating user credentials against the database.
+        args:self, event (None).
+        return: None
+        """
 
         UserName = self.e1.get().lower().strip()
         Password = self.e2.get()
