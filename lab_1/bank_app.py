@@ -77,17 +77,17 @@ class Bank:
         if self.up_amnt.get():
             try :
                 amount = float(self.up_amnt.get())
-                amnt=self.up_amnt.get()
+                amnt = self.up_amnt.get()
                 db = sql.connect("localhost","bank","bank","bank")
                 c = db.cursor()
                 c.execute("select balance from user where name='{}'".format(self.user))
                 bal = c.fetchone()[0]
-                cmd="update user SET balance=balance+{} where name='{}'".format(amnt,self.user)
+                cmd = "update user SET balance=balance+{} where name='{}'".format(amnt,self.user)
                 c.execute(cmd)
                 db.commit()
                 c.close()
                 db.close()
-                s="Sucessfully {} rs credited to the account associated with {}.\nYour Updated Balance is now {}.".format(amount,self.user,amount+bal)
+                s = "Sucessfully {} rs credited to the account associated with {}.\nYour Updated Balance is now {}.".format(amount,self.user,amount+bal)
                 messagebox.showinfo("CREDIT",s) 
                 self.credframe.grid_forget()
                 self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
@@ -138,7 +138,7 @@ class Bank:
     def update_balance(self) -> None:
         if self.up_amnt.get() :
             try :
-                amnt=float(self.up_amnt.get())
+                amnt = float(self.up_amnt.get())
                 db = sql.connect("localhost","bank","bank","bank")
                 c = db.cursor()
                 c.execute("select balance from user where name='{}'".format(self.user))
@@ -146,12 +146,12 @@ class Bank:
                 if bal :
                     if amnt <= bal:
                         
-                        cmd="update user SET balance=balance-{} where name='{}'".format(amnt,self.user)
+                        cmd = "update user SET balance=balance-{} where name='{}'".format(amnt,self.user)
                         c.execute(cmd)
                         db.commit()
                         c.close()
                         db.close()
-                        s="!!DEBITED SUCESSFULLY!! \n {}rs debited from Your Account\nYour Updated Balance is now {}.".format(amnt,bal-amnt)
+                        s = "!!DEBITED SUCESSFULLY!! \n {}rs debited from Your Account\nYour Updated Balance is now {}.".format(amnt,bal-amnt)
                         messagebox.showinfo("!!Sucess!!",s)
                         self.debit_Balance.grid_forget()
                         self.menu.grid(padx=self.ws*.3,pady=self.hs*.2)
@@ -159,7 +159,7 @@ class Bank:
                     
                     else:
                         
-                        s="\nInsufficient account balance\nyou only have {}rs in your account".format(bal)
+                        s = "\nInsufficient account balance\nyou only have {}rs in your account".format(bal)
                         messagebox.showinfo("!!DEBIT ERROR!!",s)
 
                     
@@ -273,7 +273,7 @@ class Bank:
         self.up_opass_lbl = Label(self.passupdate,text="Old password:",bg="gray",font=("Times","25","bold"),fg="#FFFFFF")
         self.up_opass_lbl.grid(row=1,column=0,padx=21,pady=22)
 
-        self.Old_Password  = StringVar()
+        self.Old_Password = StringVar()
         self.New_Password = StringVar()
         self.old_password = Entry(self.passupdate,textvariable=self.Old_Password,bg="#123456",show="*",width=20,font=("Times","20","bold"),fg="#FFFFFF")
         self.old_password.grid(row=1,column=1,padx=31,pady=22)
@@ -284,10 +284,10 @@ class Bank:
         self.new_password = Entry(self.passupdate,bg="#123456",textvariable=self.New_Password,width=20,show="*",font=("Times","20","bold"),fg="#FFFFFF")
         self.new_password.grid(row=2,column=1,padx=30,pady=21)
 
-        self.pass_b1=tk.Button(self.passupdate,text="Update",width=10,bg="gray",font=("Times","20","bold"),command=self.update_password,fg="#000000")
+        self.pass_b1 = tk.Button(self.passupdate,text="Update",width=10,bg="gray",font=("Times","20","bold"),command=self.update_password,fg="#000000")
         self.pass_b1.grid(row=3,column=1,columnspan=2,padx=30,pady=22)
         
-        self.pass_b2=tk.Button( self.passupdate,text="<<Back",bg="gray",font=("Times","18","bold"),command=self.show_m3,fg="#000000")
+        self.pass_b2 = tk.Button( self.passupdate,text="<<Back",bg="gray",font=("Times","18","bold"),command=self.show_m3,fg="#000000")
         self.pass_b2.grid(row=3,column=0,pady=15,padx=30)
 
         self.passupdate.grid(padx=self.ws*.3,pady=self.hs*.2)
@@ -346,9 +346,9 @@ class Bank:
         self.up_name = Entry( self.nameupdate,bg="#123456",width=20,font=("Times","20","bold"),fg="#FFFFFF")
         self.up_name.grid(row=2,column=1,padx=40)
 
-        self.name_b1=tk.Button( self.nameupdate,text="Update",bg="gray",width=14,font=("Times","20","bold"),command=self.change_name,fg="#000000")
+        self.name_b1 = tk.Button( self.nameupdate,text="Update",bg="gray",width=14,font=("Times","20","bold"),command=self.change_name,fg="#000000")
         self.name_b1.grid(row=3,column=1,padx=67,pady=10,columnspan=2)
-        self.name_b2=tk.Button( self.nameupdate,text="<<Back",bg="gray",font=("Times","20","bold"),command=self.show_m1,fg="#000000")
+        self.name_b2 = tk.Button( self.nameupdate,text="<<Back",bg="gray",font=("Times","20","bold"),command=self.show_m1,fg="#000000")
         self.name_b2.grid(row=4,column=0,pady=15,padx=10)
 
         self.nameupdate.grid(padx=self.ws*.3,pady=self.hs*.2)
