@@ -1,6 +1,7 @@
-from tkinter import *
-import tkinter as tk
 import pymysql as sql
+import tkinter as tk
+
+from tkinter import *
 from tkinter import messagebox
 
 
