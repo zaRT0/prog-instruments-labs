@@ -1,8 +1,10 @@
-import pymysql as sql
 import tkinter as tk
 
-from tkinter import *
-from tkinter import messagebox
+from tkinter import (
+    Button, Entry, Frame, Label, StringVar, Tk, mainloop, messagebox
+)
+
+import pymysql as sql
 
 
 class Bank:
