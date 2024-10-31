@@ -6,6 +6,7 @@ from typing import List
 
 from file_path import CSV_FILE_PATH, JSON_PATH
 
+
 def calculate_checksum(row_numbers: List[int]) -> str:
     """
     Вычисляет md5 хеш от списка целочисленных значений.
@@ -47,7 +48,7 @@ def process_csv(file_path: str) -> None:
     return: None
     """
     regex_patterns = {
-        'column_1': r"^[\w\.-]+@[\w\.-]+\.\w+$",  #правильный хэш 3168e2dfacd9dd9d8abfb1b093eabf83
+        'column_1': r"^[\w\.-]+@[\w\.-]+\.\w+$",
         'column_2': r"^\d{3}(?:\s\w+)+$",
         'column_3': r"^\d{11}$",
         'column_4': r"^\d{2}\s\d{2}\s\d{6}$",
@@ -58,6 +59,7 @@ def process_csv(file_path: str) -> None:
         'column_9': r"^[a-z]{2}(-[a-z]{2})?$",
         'column_10': r"^\d{2}:\d{2}:\d{2}\.\d{1,}$"
     }
+    
     try:
         data = pd.read_csv(CSV_FILE_PATH, encoding='utf-16', sep=';', header=0)
     except FileNotFoundError:
@@ -93,4 +95,3 @@ def process_csv(file_path: str) -> None:
 
 if __name__ == "__main__":
     process_csv(CSV_FILE_PATH)
-   
