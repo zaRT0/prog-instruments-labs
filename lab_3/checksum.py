@@ -6,7 +6,6 @@ from typing import List
 
 from file_path import CSV_FILE_PATH, JSON_PATH
 
-
 def calculate_checksum(row_numbers: List[int]) -> str:
     """
     Вычисляет md5 хеш от списка целочисленных значений.
@@ -48,16 +47,16 @@ def process_csv(file_path: str) -> None:
     return: None
     """
     regex_patterns = {
-        'Column_1': r'^[\w\.-]+@[\w\.-]+\.\w+$',
-        'Column_2': r'^\d{3} .*$', 
-        'Column_3': r'^\d{11}$',
-        'Column_4': r'^\d{2} \d{2} \d{6}$|^\d{2}-\d{2}-\d{6}$',
-        'Column_5': r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(:\d+)?$',
-        'Column_6': r'^-?\d{1,3}\.\d+$',
-        'Column_7': r'^#[0-9a-fA-F]{6}$',
-        'Column_8': r'^\d-\d{5}-\d{3}-\d{1}$|^\d{3}-\d-\d{5}-\d{3}-\d$',
-        'Column_9': r'^[a-z]{2}(-[a-z]{2})?$',
-        'Column_10': r'^\d{2}:\d{2}:\d{2}\.\d+$'
+        'column_1': r"^[\w\.-]+@[\w\.-]+\.\w+$",
+        'column_2': r"^^\d{3}(?:\s\w+)+$",
+        'column_3': r"^\d{11}$",
+        'column_4': r"^\d{2}\s\d{2}\s\d{6}$",
+        'column_5': r"^(\d{1,3}\.){3}\d{1,3}$",
+        'column_6': r"^-?(?:180|\d{1,2}|1[0-7]\d)(\.\d+)?$",
+        'column_7': r"^#([A-Fa-f0-9]{6})$",
+        'column_8': r"(?:\d{3}-)?\d-\d{5}-\d{3}-\d",
+        'column_9': r"^[a-z]{2}(-[a-z]{2})?$",
+        'column_10': r"^\d{2}:\d{2}:\d{2}\.\d{1,}$"
     }
     try:
         data = pd.read_csv(CSV_FILE_PATH, encoding='utf-16', sep=';', header=0)
@@ -71,7 +70,7 @@ def process_csv(file_path: str) -> None:
         print("Ошибка: Неверный формат файла.")
         return
     
-    data.columns = [f'Column_{i+1}' for i in range(10)]
+    data.columns = [f'column_{i+1}' for i in range(10)]
 
     error_rows = []
 
@@ -86,6 +85,8 @@ def process_csv(file_path: str) -> None:
 
     checksum = calculate_checksum(error_rows)
     serialize_result(variant="17", checksum=checksum)
+    
+    print(f"Количество невалидных записей: {len(error_rows)}")
 
     print("Контрольная сумма:", checksum)
 
