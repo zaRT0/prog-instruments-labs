@@ -47,8 +47,8 @@ def process_csv(file_path: str) -> None:
     return: None
     """
     regex_patterns = {
-        'column_1': r"^[\w\.-]+@[\w\.-]+\.\w+$",
-        'column_2': r"^^\d{3}(?:\s\w+)+$",
+        'column_1': r"^[\w\.-]+@[\w\.-]+\.\w+$",  #правильный хэш 3168e2dfacd9dd9d8abfb1b093eabf83
+        'column_2': r"^\d{3}(?:\s\w+)+$",
         'column_3': r"^\d{11}$",
         'column_4': r"^\d{2}\s\d{2}\s\d{6}$",
         'column_5': r"^(\d{1,3}\.){3}\d{1,3}$",
@@ -81,7 +81,7 @@ def process_csv(file_path: str) -> None:
                 row_has_error = True
                 break
         if row_has_error:
-            error_rows.append(index - 1)
+            error_rows.append(index)
 
     checksum = calculate_checksum(error_rows)
     serialize_result(variant="17", checksum=checksum)
@@ -93,3 +93,4 @@ def process_csv(file_path: str) -> None:
 
 if __name__ == "__main__":
     process_csv(CSV_FILE_PATH)
+   
