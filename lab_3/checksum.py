@@ -4,7 +4,7 @@ import json
 import hashlib
 from typing import List
 
-from file_path import CSV_FILE_PATH, JSON_PATH
+from file_path import CSV_FILE_PATH, JSON_PATH, REGEX_PATTERNS
 
 
 def calculate_checksum(row_numbers: List[int]) -> str:
@@ -41,57 +41,62 @@ def serialize_result(variant: int, checksum: str) -> None:
         print(f"Произошла ошибка при обновлении файла: {e}")
 
 
-def process_csv(file_path: str) -> None:
+def load_csv(file_path: str) -> pd.DataFrame:
     """
-    Основная функция для загрузки, валидации данных и расчета контрольной суммы.
+    Загружает CSV файл и обрабатывает возможные исключения.
     param: file_path as str
-    return: None
+    return: data
     """
-    regex_patterns = {
-        'column_1': r"^[\w\.-]+@[\w\.-]+\.\w+$",
-        'column_2': r"^\d{3}(?:\s\w+)+$",
-        'column_3': r"^\d{11}$",
-        'column_4': r"^\d{2}\s\d{2}\s\d{6}$",
-        'column_5': r"^(\d{1,3}\.){3}\d{1,3}$",
-        'column_6': r"^-?(?:180|\d{1,2}|1[0-7]\d)(\.\d+)?$",
-        'column_7': r"^#([A-Fa-f0-9]{6})$",
-        'column_8': r"(?:\d{3}-)?\d-\d{5}-\d{3}-\d",
-        'column_9': r"^[a-z]{2}(-[a-z]{2})?$",
-        'column_10': r"^\d{2}:\d{2}:\d{2}\.\d{1,}$"
-    }
-    
     try:
         data = pd.read_csv(CSV_FILE_PATH, encoding='utf-16', sep=';', header=0)
+        return data
     except FileNotFoundError:
-        print(f"Ошибка: Файл '{CSV_FILE_PATH}' не найден.")
-        return
+        print(f"Ошибка: Файл '{file_path}' не найден.")
     except pd.errors.EmptyDataError:
         print("Ошибка: Файл пуст.")
-        return
     except pd.errors.ParserError:
         print("Ошибка: Неверный формат файла.")
-        return
-    
+    return None
+
+
+def process_data(file_path: str) -> list:
+    """
+    Функция для загрузки, валидации данных и расчета контрольной суммы.
+    param: file_path as str
+    return: error_rows as list
+    """
+    data = load_csv(file_path)
+
     data.columns = [f'column_{i+1}' for i in range(10)]
-
+    
     error_rows = []
-
+    
     for index, row in data.iterrows():
         row_has_error = False
-        for col, pattern in regex_patterns.items():
+        for col, pattern in REGEX_PATTERNS.items():
             if not re.match(pattern, str(row[col])):
                 row_has_error = True
                 break
         if row_has_error:
             error_rows.append(index)
+    
+    return error_rows
 
-    checksum = calculate_checksum(error_rows)
+
+def process_main(file_path: str) -> None:
+    """
+    Основная функция.
+    param: file_path as str
+    return: None
+    """
+    rows = process_data(file_path)
+    checksum = calculate_checksum(rows)
+    
     serialize_result(variant="17", checksum=checksum)
     
-    print(f"Количество невалидных записей: {len(error_rows)}")
-
+    print(f"Количество невалидных записей: {len(rows)}")
     print("Контрольная сумма:", checksum)
 
 
 if __name__ == "__main__":
-    process_csv(CSV_FILE_PATH)
+    process_main(CSV_FILE_PATH)
