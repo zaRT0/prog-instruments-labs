@@ -1,0 +1,39 @@
+2024-11-19T18:44:47.777363+0400 INFO Navigating to the Home Page
+2024-11-19T18:44:47.778360+0400 INFO Home page frame created
+2024-11-19T18:44:47.780356+0400 INFO Home page title label created
+2024-11-19T18:44:47.781352+0400 INFO Log in button added
+2024-11-19T18:44:47.782350+0400 INFO Register button added
+2024-11-19T18:44:51.080576+0400 INFO Navigating to the Register Page
+2024-11-19T18:44:51.081574+0400 INFO User input fields reset
+2024-11-19T18:44:51.081574+0400 INFO Register page frame created
+2024-11-19T18:44:51.083568+0400 INFO Labels for Name, Password, and Contact created
+2024-11-19T18:44:51.083568+0400 INFO Input fields for Name, Password, and Contact created
+2024-11-19T18:45:04.869262+0400 INFO User registration process started
+2024-11-19T18:45:04.870259+0400 INFO Started validating user data
+2024-11-19T18:45:04.870259+0400 INFO Validation results: [True, True, True]
+2024-11-19T18:45:04.871256+0400 INFO Attempting to register user: zaRT0
+2024-11-19T18:45:04.875246+0400 INFO User 'zaRT0' successfully registered
+2024-11-19T18:45:04.875246+0400 INFO Database connection closed after registration
+2024-11-19T18:45:06.501112+0400 INFO Navigating to the Home Page
+2024-11-19T18:45:06.501627+0400 INFO Home page frame created
+2024-11-19T18:45:06.502143+0400 INFO Home page title label created
+2024-11-19T18:45:06.502648+0400 INFO Log in button added
+2024-11-19T18:45:06.503161+0400 INFO Register button added
+2024-11-19T19:02:45.699371+0400 INFO Program started
+2024-11-19T19:02:45.699371+0400 INFO Connecting to the database...
+2024-11-19T19:02:45.700364+0400 INFO Creating 'students' table if not exists...
+2024-11-19T19:02:45.701081+0400 INFO 'students' table created or already exists.
+2024-11-19T19:02:45.701081+0400 INFO 'users' table created or already exists.
+2024-11-19T19:02:45.701081+0400 INFO Database connection closed.
+2024-11-19T19:02:45.702063+0400 INFO Navigating to the Home Page
+2024-11-19T19:02:45.702063+0400 INFO Navigating to the Home Page
+2024-11-19T19:02:45.702780+0400 INFO Home page frame created
+2024-11-19T19:02:45.703794+0400 INFO Home page title label created
+2024-11-19T19:02:45.704789+0400 INFO Log in button added
+2024-11-19T19:02:45.705786+0400 INFO Register button added
+2024-11-19T19:02:46.767112+0400 INFO Navigating to the Register Page
+2024-11-19T19:02:46.767626+0400 INFO User input fields reset
+2024-11-19T19:02:46.768140+0400 INFO Register page frame created
+2024-11-19T19:02:46.768652+0400 INFO Labels for Name, Password, and Contact created
+2024-11-19T19:02:46.769674+0400 INFO Input fields for Name, Password, and Contact created
+2024-11-19T19:02:48.234130+0400 INFO Main loop started.
